@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  <meta charset="utf-8">
+  <title>More Components</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+ 
+  <style>
+    #container {
+      background-color: #FFF;
+      padding: 50px;
+    }
+  </style>
+</head>
+ 
+<body>
+  <div id="container"></div>
+ 
+  <script type="text/babel">
+    class CardImage extends React.Component{
+        constructor(props, context) {
+                super(props, context);
+                
+                this.state = {
+                    cardNumber: 1
+                };
+
+                this.cardChange = this.cardChange.bind(this);
+            }
+        
+
+        cardChange(){
+            this.setState({
+                cardNumber: this.state.cardNumber + 1 
+            });
+        }
+
+        componentDidMount() {
+            
+        }
+
+        componentDidUpdate() {
+            if (this.state.cardNumber > 3){
+                this.setState({
+                    cardNumber: 1
+                })
+            }
+        }
+
+        render(){
+            return(
+                <div>
+                    <img src={"C:\\repos\\React practice\\Game\\img\\c\\ccgf" + this.state.cardNumber.toString() + ".png"}/>
+                </div>
+            );   
+        }
+    }
+
+    class Card extends React.Component{
+        render(){
+            var cardStyle = {
+                height: 169,
+                width: 130,
+                border: "1px solid",
+                boxShadow: "1px 1px"
+            }
+
+            return(
+                <div style = {cardStyle}>
+                    <CardImage/>
+                </div>
+            );
+        }
+    }
+
+    class Board extends React.Component{
+        render(){
+            var boardStyles = {
+                width: 500,
+                height: 700,
+                border: "solid"
+            }
+
+            return(
+                <div style = {boardStyles}>
+                    <Card/>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+      <div>
+        <Board/>
+      </div>,
+      document.querySelector("#container")
+    );
+  </script>
+</body>
+ 
+</html>
